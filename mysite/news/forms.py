@@ -44,3 +44,8 @@ class NewsForm(forms.ModelForm):
         if re.match(r'\d', title):
             raise ValidationError('Название не должно начинаться с цифры')
         return title
+
+class ContactForm(forms.Form):
+    subject = forms.CharField(label='Тема', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    content = forms.CharField(label='Текст', widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+

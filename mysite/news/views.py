@@ -7,9 +7,9 @@ from django.core.paginator import Paginator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout
 from django.contrib import messages
-from .forms import NewsForm, UserRegisterForm, UserLoginForm
+from .forms import NewsForm, UserRegisterForm, UserLoginForm, ContactForm
 from .models import News, Category
-
+from django.core.mail import send_mail
 
 class HomeNews(ListView):
     model = News
@@ -58,6 +58,26 @@ class CreateNews(LoginRequiredMixin, CreateView):
     # login_url = '/admin/'
     raise_exception = True
 
+
+def mail(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            mail = send_mail(form.cleaned_data['subject'],
+                             form.cleaned_data['content'],
+                             'lolikobob@gmail.com',
+                             ['alex_2009@mail.ru'],
+                             fail_silently=False)
+            if mail:
+                messages.success(request, 'Письмо отправлено')
+                return redirect('mail')
+            else:
+                messages.error(request, 'Ошибка отправки')
+        else:
+            messages.error(request, 'Заполните все поля')
+    else:
+        form = ContactForm()
+    return render(request, 'news/mail.html', {"form": form})
 
 def test(request):
     objects = ['john1', 'paul2', 'george3', 'ringo4', 'john5', 'paul6', 'george7']

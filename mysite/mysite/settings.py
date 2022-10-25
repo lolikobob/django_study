@@ -140,3 +140,10 @@ DEBUG_TOOLBAR_CONFIG = {
     ],
     'SHOW_TEMPLATE_CONTEXT': True,
 }
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'lolikobob@gmail.com'
+EMAIL_HOST_PASSWORD = 'ldbzbzuzapsbtqzu'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
