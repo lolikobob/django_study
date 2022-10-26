@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
+    'ckeditor_uploader',
+    'captcha',
     'news.apps.NewsConfig',
     'debug_toolbar',
 ]
@@ -114,6 +117,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -147,3 +151,10 @@ EMAIL_HOST_USER = 'lolikobob@gmail.com'
 EMAIL_HOST_PASSWORD = 'ldbzbzuzapsbtqzu'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'django_cache'),
+    }
+}
